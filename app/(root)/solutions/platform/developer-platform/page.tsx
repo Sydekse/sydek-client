@@ -1,24 +1,35 @@
 "use client";
 
 import type React from "react";
-import HeroSection from "@/components/shared/hero-section";
+import Link from "next/link";
+import { ArrowRight, Code, Database, GitBranch, Terminal } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { HeroSection } from "@/components/careers/hero-section";
 import KeyBenefitsSection from "@/components/platform/key-benefits";
 import FeaturesSection from "@/components/platform/features";
 import PlatformOverview from "@/components/platform/platfrom-overview";
 import TestimonialsSection from "@/components/shared/testimonial";
 import CTACard from "@/components/shared/cta-card";
-import { ArrowRight, Code, Database, GitBranch, Terminal } from "lucide-react";
 
 export default function DeveloperPlatform() {
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection
-        title="Developer"
-        highlightedTitle="Platform"
-        description="Accelerate your development process with our comprehensive suite of tools and APIs. Build, test, and deploy with ease."
-        buttonText="Explore APIs"
-        buttonLink="/apis"
-        backgroundParticles={20} // Optional customization
+        title="Developer Platform"
+        highlightedWord="Platform"
+        subtitle="Accelerate your development process with our comprehensive suite of tools and APIs. Build, test, and deploy with ease."
+        actions={
+          <Button
+            size="lg"
+            className="rounded-full bg-secondary text-white hover:bg-secondary/90"
+            asChild
+          >
+            <Link href="/apis">
+              Explore APIs
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+            </Link>
+          </Button>
+        }
       />
 
       <FeaturesSection

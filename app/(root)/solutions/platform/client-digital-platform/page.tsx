@@ -1,30 +1,43 @@
 "use client";
 
 import type React from "react";
-import HeroSection from "@/components/shared/hero-section";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BarChart,
+  CheckCircle,
+  FileText,
+  Shield,
+  Users,
+  Zap,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { HeroSection } from "@/components/careers/hero-section";
 import KeyBenefitsSection from "@/components/platform/key-benefits";
 import FeaturesSection from "@/components/platform/features";
 import PlatformOverview from "@/components/platform/platfrom-overview";
 import TestimonialsSection from "@/components/shared/testimonial";
 import CTACard from "@/components/shared/cta-card";
-import {
-  CheckCircle,
-  BarChart,
-  Users,
-  Shield,
-  Zap,
-  FileText,
-} from "lucide-react";
 
 export default function ClientDigitalPlatform() {
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection
-        title="Client Digital"
-        highlightedTitle="Platform"
-        description="Empower your business with our comprehensive client management solution. Streamline operations, enhance collaboration, and drive growth."
-        buttonText="Get Started"
-        buttonLink="/signup"
+        title="Client Digital Platform"
+        highlightedWord="Platform"
+        subtitle="Empower your business with our comprehensive client management solution. Streamline operations, enhance collaboration, and drive growth."
+        actions={
+          <Button
+            size="lg"
+            className="rounded-full bg-secondary text-white hover:bg-secondary/90"
+            asChild
+          >
+            <Link href="/signup">
+              Get Started
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+            </Link>
+          </Button>
+        }
       />
       <KeyBenefitsSection
         mainTitle="Transform Your Operations"
@@ -105,24 +118,19 @@ export default function ClientDigitalPlatform() {
       />
       <TestimonialsSection
         title="What Our Clients Say"
+        columns={2}
         testimonials={[
           {
-            name: "John Doe",
-            company: "Tech Innovators Inc.",
+            name: "Getaneh S, Tech CEO",
+            company: "Diplomat Corner",
             quote:
-              "The Client Digital Platform has revolutionized how we manage our projects. It's intuitive, powerful, and has significantly improved our team's productivity.",
+              "Their dedicated team took our project from concept to completion seamlessly. Exceptional quality and communication!",
           },
           {
-            name: "Jane Smith",
-            company: "Global Solutions Ltd.",
+            name: "Bewqet L, CEO",
+            company: "Organic Millstone",
             quote:
-              "We've seen a 30% increase in project completion rates since implementing this platform. The real-time analytics have been a game-changer for our decision-making process.",
-          },
-          {
-            name: "Alex Johnson",
-            company: "Creative Minds Agency",
-            quote:
-              "The collaboration features are top-notch. Our team communication has never been better, and clients love the transparency it provides.",
+              "They help me generate more leads with the digital world they built for my company",
           },
         ]}
       />

@@ -23,42 +23,24 @@ import {
   Quote,
 } from "lucide-react";
 import Link from "next/link";
+import { HeroSection } from "@/components/careers/hero-section";
 
 export default function OutsourcingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-        <div className="absolute top-40 right-20 w-72 h-72 bg-secondary/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-40 w-80 h-80 bg-tertiary/20 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Expert <span className="text-gradient">Outsourcing</span>{" "}
-              Solutions
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Access top-tier talent, specialized teams, and procurement
-              services to accelerate your digital transformation journey.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/company/contact">
-                <Button
-                  size="lg"
-                  className="bg-secondary hover:bg-secondary/90"
-                >
-                  Request Consultation
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              {/* <Button size="lg" variant="outline">
-                View Case Studies
-              </Button> */}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Expert Outsourcing Solutions"
+        highlightedWord="Outsourcing"
+        subtitle="Access top-tier talent, specialized teams, and procurement services to accelerate your digital transformation journey."
+        actions={
+          <Button size="lg" className="bg-secondary hover:bg-secondary/90" asChild>
+            <Link href="/company/contact">
+              Request Consultation
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        }
+      />
 
       {/* Services Overview */}
       <section className="py-16 md:py-24 bg-muted/50">

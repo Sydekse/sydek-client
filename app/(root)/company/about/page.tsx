@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import InteractiveCard from "@/components/about/interactive-card";
-import HeroSection from "@/components/shared/hero-section";
+import { HeroSection } from "@/components/careers/hero-section";
 import { MissionSection } from "@/components/about/mission-section";
 import { ValuesSection } from "@/components/about/values-section";
 import { CTASection } from "@/components/about/cta-section";
@@ -79,9 +79,9 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection
-        title="About"
-        highlightedTitle="Sydek"
-        description="A forward-thinking digital services company committed to helping businesses and individuals succeed in the digital world."
+        title="About Sydek"
+        highlightedWord="Sydek"
+        subtitle="A forward-thinking digital services company committed to helping businesses and individuals succeed in the digital world."
       />
 
       <MissionSection
