@@ -4,7 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Tabs } from "@/components/ui/tabs";
-import InteractiveBackground from "@/components/interactive-background";
+import { HeroSection } from "@/components/careers/hero-section";
 import LoginForm from "@/components/auth/sign-in-form";
 import SignupForm from "@/components/auth/sign-up-form";
 import Sidebar from "@/components/auth/side-bar-comp";
@@ -73,42 +73,34 @@ export default function AuthPage() {
     router.push("/dashboard");
   };
 
+  const loginSubtitle = "Sign in to your dashboard and pick up where you left off.";
+  const signupSubtitle = "Choose your plan details on the next step—we only need basics to spin up your workspace.";
+
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-        <InteractiveBackground
-          className="absolute inset-0"
-          particleCount={20}
-        />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-start gap-8 w-full">
-            {/* Sidebar */}
-            <div className="w-full lg:w-1/2 lg:flex-shrink-0">
+      <HeroSection
+        variant="left"
+        sectionClassName="pb-24"
+        leadingAccessory={
+          <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Link>
+        }
+        title={
+          activeTab === "login" ? "Welcome Back" : "Create Your Account"
+        }
+        highlightedWord={activeTab === "login" ? "Back" : "Account"}
+        subtitle={
+          activeTab === "login" ? loginSubtitle : signupSubtitle
+        }
+        belowContent={
+          <div className="flex w-full flex-col items-start gap-10 pt-12 lg:flex-row lg:gap-12">
+            <div className="w-full lg:w-1/2 lg:shrink-0">
               <Sidebar tab={activeTab} />
             </div>
 
-            {/* Form Section */}
-            <div className="w-full lg:w-1/2 lg:flex-shrink-0 flex flex-col items-center lg:items-start">
-              <Link
-                href="/"
-                className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Home
-              </Link>
-
-              <h1 className="text-3xl font-bold tracking-tight mb-6 text-center lg:text-left">
-                {activeTab === "login" ? (
-                  <>
-                    Welcome <span className="text-gradient">Back</span>
-                  </>
-                ) : (
-                  <>
-                    Create Your <span className="text-gradient">Account</span>
-                  </>
-                )}
-              </h1>
-
+            <div className="flex w-full flex-col lg:w-1/2 lg:shrink-0">
               <div className="w-full max-w-md">
                 <Tabs
                   value={activeTab}
@@ -132,8 +124,8 @@ export default function AuthPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        }
+      />
     </div>
   );
 }
