@@ -1,5 +1,17 @@
 import type { User } from "./user";
 
+export interface CalendarEvent {
+  title: string;
+  description?: string;
+  start: string;
+  end: string;
+  allDay?: boolean;
+  location?: string;
+  projectId?: string;
+  projectName?: string;
+  attendees: User[];
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -9,11 +21,34 @@ export interface Project {
   status: "on-track" | "at-risk" | "delayed" | "completed";
   client?: string;
   teamSize?: number;
-  teamMembers: string[];
+  teamMembers: Array<User | string>;
   tasks: Task[];
   progress: number;
   dueDate: string;
   priority: "high" | "medium" | "low";
+  tags?: string[];
+}
+
+export interface ProjectMilestone {
+  title: string;
+  dueDate: string;
+  completed: boolean;
+  description?: string;
+}
+
+export interface ProjectFile {
+  name: string;
+  size: string;
+  uploadedBy: User;
+  uploadedAt: string;
+}
+
+export interface ProjectNote {
+  title: string;
+  content: string;
+  createdBy: User;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Task {
@@ -73,6 +108,7 @@ export interface TaskList {
 export interface TaskDetail extends Task {
   comments: TaskComment[];
   subtasks: Subtask[];
+  history: TaskHistory[];
   attachments: Array<{
     id: string;
     name: string;
@@ -83,6 +119,7 @@ export interface TaskDetail extends Task {
     uploadedAt: string;
   }>;
   timeSpent?: number;
+  timeTracking?: { spent: number; estimated: number };
 }
 
 export interface Subtask {
@@ -95,6 +132,10 @@ export interface Subtask {
 export interface ProjectDetail extends Project {
   client: string;
   teamSize: number;
+  budget?: { total: number; spent: number; currency: string };
+  milestones: ProjectMilestone[];
+  files: ProjectFile[];
+  notes: ProjectNote[];
 }
 
 export interface TeamMember extends User {
@@ -154,6 +195,7 @@ export interface TaskComment {
   user: User;
   content: string;
   timestamp: string;
+  attachments?: Array<{ name: string }>;
 }
 
 export interface TaskHistory {
