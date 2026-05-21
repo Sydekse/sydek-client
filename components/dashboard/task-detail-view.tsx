@@ -1,6 +1,7 @@
 "use client"
 
-import type { TaskDetail, User } from "@/types/dashboard"
+import type { TaskDetail } from "@/types/dashboard"
+import type { User } from "@/types/user"
 import { CommentItem } from "@/components/shared/comment-item"
 import { UserAvatar } from "@/components/shared/user-avatar"
 import { Button } from "@/components/ui/button"

@@ -130,20 +130,28 @@ export function ProjectDetailView({ project, className }: ProjectDetailViewProps
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {project.teamMembers.map((member, index) => (
-                  <div key={index} className="flex items-center justify-between">
+                {project.teamMembers.map((member, index) => {
+                  const displayName =
+                    typeof member === "string" ? member : member.name;
+                  const displayRole =
+                    typeof member === "string" ? "Team" : member.role;
+                  const memberId =
+                    typeof member === "string" ? String(index) : member.id;
+                  return (
+                  <div key={memberId} className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <UserAvatar user={member} />
                       <div>
-                        <p className="font-medium">{member.name}</p>
-                        <p className="text-xs text-muted-foreground">{member.role}</p>
+                        <p className="font-medium">{displayName}</p>
+                        <p className="text-xs text-muted-foreground">{displayRole}</p>
                       </div>
                     </div>
                     <Button variant="ghost" size="sm" asChild>
-                      <Link href={`/dashboard/messages?user=${member.id}`}>Message</Link>
+                      <Link href={`/dashboard/messages?user=${encodeURIComponent(memberId)}`}>Message</Link>
                     </Button>
                   </div>
-                ))}
+                );
+                })}
               </div>
 
               <Button variant="outline" className="w-full mt-4" asChild>

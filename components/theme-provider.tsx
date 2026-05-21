@@ -1,13 +1,26 @@
-"use client"
+"use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes"
-import type { ThemeProviderProps } from "next-themes"
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { installLocalStorageShimOn } from "@/lib/local-storage-shim";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+/** Browser: fix broken/embedder `window.localStorage`. Server: no-op (`window` missing). */
+function ensureClientLocalStorage(): void {
+  if (typeof window === "undefined") return;
+  installLocalStorageShimOn(
+    window as unknown as typeof globalThis & { localStorage?: Storage }
+  );
+}
+
+export function ThemeProvider({
+  children,
+  ...props
+}: React.ComponentProps<typeof NextThemesProvider>) {
+  ensureClientLocalStorage();
+
   return (
     <NextThemesProvider {...props} defaultTheme="light" forcedTheme={props.forcedTheme || undefined}>
       {children}
     </NextThemesProvider>
-  )
+  );
 }
-

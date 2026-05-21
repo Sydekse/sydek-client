@@ -83,7 +83,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
       </div>
 
       <div className="mt-3 flex flex-wrap gap-1">
-        {project.tags.map((tag, index) => (
+        {(project.tags ?? []).map((tag, index) => (
           <span key={index} className="text-xs px-1.5 py-0.5 bg-muted rounded-sm">
             {tag}
           </span>

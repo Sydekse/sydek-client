@@ -2,7 +2,8 @@
 
 import type React from "react"
 
-import type { Message, User } from "@/types/dashboard"
+import type { Message } from "@/types/dashboard"
+import type { User } from "@/types/user"
 import { MessageBubble } from "@/components/shared/message-bubble"
 import { UserAvatar } from "@/components/shared/user-avatar"
 import { Button } from "@/components/ui/button"

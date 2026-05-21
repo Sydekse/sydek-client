@@ -1,68 +1,71 @@
+"use client";
+
 import type React from "react";
-import { Button } from "@/components/ui/button";
-import InteractiveBackground from "@/components/interactive-background";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-interface HeroSectionProps {
+import { Button } from "@/components/ui/button";
+import { HeroSection } from "@/components/careers/hero-section";
+
+/** @deprecated Prefer `@/components/careers/hero-section` (`subtitle`, `highlightedWord`, `actions`). */
+interface LegacyHeroSectionProps {
   title: string;
-  highlightedTitle?: string; // Optional part of title with gradient
+  highlightedTitle?: string;
   description: string;
   buttonText?: string;
-  buttonLink?: string; // Optional link for routing
-  onButtonClick?: () => void; // Optional click handler
-  backgroundParticles?: number; // Customize InteractiveBackground
+  buttonLink?: string;
+  onButtonClick?: () => void;
+  /** Unused — hero matches careers radial style. */
+  backgroundParticles?: number;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({
+/**
+ * Compatibility wrapper: maps shared hero props to `HeroSection`.
+ */
+const SharedHeroSection: React.FC<LegacyHeroSectionProps> = ({
   title,
   highlightedTitle,
   description,
   buttonText,
   buttonLink,
   onButtonClick,
-  backgroundParticles = 20,
-}) => (
-  <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-    <InteractiveBackground
-      className="absolute inset-0"
-      particleCount={backgroundParticles}
-    />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-    <div className="container relative z-10 mx-auto px-4 md:px-6">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          {title}{" "}
-          {highlightedTitle && (
-            <span className="text-gradient">{highlightedTitle}</span>
-          )}
-        </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-          {description}
-        </p>
-        {buttonText && (
+}) => {
+  const trail = highlightedTitle?.trim() ?? "";
+  const fullTitle =
+    trail.length > 0
+      ? `${title.trimEnd()} ${trail}`.replace(/\s+/g, " ")
+      : title.trim();
+  const word = trail.length > 0 && fullTitle.includes(trail) ? trail : undefined;
+
+  return (
+    <HeroSection
+      title={fullTitle}
+      highlightedWord={word}
+      subtitle={description}
+      actions={
+        buttonText ? (
           <Button
             size="lg"
-            className="bg-secondary hover:bg-secondary/90 text-white"
+            className="rounded-full bg-secondary text-white hover:bg-secondary/90"
+            asChild={Boolean(buttonLink) && !onButtonClick}
             onClick={onButtonClick}
-            asChild={!!buttonLink} // Use asChild for Link wrapping
           >
-            {buttonLink ? (
-              <a href={buttonLink}>
+            {buttonLink && !onButtonClick ? (
+              <Link href={buttonLink}>
                 {buttonText}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+              </Link>
             ) : (
               <>
                 {buttonText}
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </>
             )}
           </Button>
-        )}
-      </div>
-    </div>
-  </section>
-);
+        ) : undefined
+      }
+    />
+  );
+};
 
-export default HeroSection;
+export default SharedHeroSection;
