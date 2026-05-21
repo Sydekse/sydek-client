@@ -2,8 +2,6 @@ import { ContactEmailTemplate } from "@/components/email/contact-email-template"
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
     const formData = await request.json();
@@ -15,6 +13,8 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     if (!process.env.CONTACT_EMAIL) {
       console.error("CONTACT_EMAIL is not set in environment variables");
