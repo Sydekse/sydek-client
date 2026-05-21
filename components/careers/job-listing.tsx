@@ -26,8 +26,11 @@ export function JobListing({ jobs }: JobListingProps) {
 
         <div className="max-w-4xl mx-auto">
           <Accordion type="single" collapsible className="space-y-6">
-            {jobs.map((job, index) => (
-              <JobCard key={index} job={job} />
+            {jobs.map((job) => (
+              <JobCard
+                key={job.slug || job.title.toLowerCase().replace(/\s+/g, "-")}
+                job={job}
+              />
             ))}
           </Accordion>
         </div>

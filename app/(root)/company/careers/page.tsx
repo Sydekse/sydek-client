@@ -2,14 +2,17 @@ import Image from "next/image";
 import { HeroSection } from "@/components/careers/hero-section";
 import { BenefitsSection } from "@/components/careers/benefits-section";
 import { JobListing } from "@/components/careers/job-listing";
+import { listVacancies } from "@/lib/careers-api";
+import type { Job } from "@/components/careers/types";
 
-const jobOpenings = [
+const fallbackJobOpenings: Job[] = [
   {
+    slug: "senior-frontend-developer",
     title: "Senior Frontend Developer",
     department: "Engineering",
     location: "San Francisco, CA (Hybrid)",
-    type: "Full-time",
-    salary: "$120,000 - $150,000",
+    employmentType: "Full-time",
+    salaryRange: "$120,000 - $150,000",
     description:
       "We're looking for a Senior Frontend Developer to join our team and help build beautiful, responsive, and performant user interfaces for our clients.",
     responsibilities: [
@@ -28,11 +31,12 @@ const jobOpenings = [
     ],
   },
   {
+    slug: "backend-engineer",
     title: "Backend Engineer",
     department: "Engineering",
     location: "Remote",
-    type: "Full-time",
-    salary: "$110,000 - $140,000",
+    employmentType: "Full-time",
+    salaryRange: "$110,000 - $140,000",
     description:
       "We're seeking a talented Backend Engineer to develop and maintain robust server-side applications and APIs for our digital solutions.",
     responsibilities: [
@@ -51,11 +55,12 @@ const jobOpenings = [
     ],
   },
   {
+    slug: "ux-ui-designer",
     title: "UX/UI Designer",
     department: "Design",
     location: "San Francisco, CA (On-site)",
-    type: "Full-time",
-    salary: "$90,000 - $120,000",
+    employmentType: "Full-time",
+    salaryRange: "$90,000 - $120,000",
     description:
       "Join our design team to create intuitive and engaging user experiences for web and mobile applications.",
     responsibilities: [
@@ -74,11 +79,12 @@ const jobOpenings = [
     ],
   },
   {
+    slug: "project-manager",
     title: "Project Manager",
     department: "Operations",
     location: "Remote",
-    type: "Full-time",
-    salary: "$100,000 - $130,000",
+    employmentType: "Full-time",
+    salaryRange: "$100,000 - $130,000",
     description:
       "We're looking for an experienced Project Manager to lead digital projects from conception to completion, ensuring they are delivered on time and within budget.",
     responsibilities: [
@@ -97,11 +103,12 @@ const jobOpenings = [
     ],
   },
   {
+    slug: "devops-engineer",
     title: "DevOps Engineer",
     department: "Engineering",
     location: "Remote",
-    type: "Full-time",
-    salary: "$115,000 - $145,000",
+    employmentType: "Full-time",
+    salaryRange: "$115,000 - $145,000",
     description:
       "Join our team as a DevOps Engineer to build and maintain our infrastructure, deployment pipelines, and monitoring systems.",
     responsibilities: [
@@ -120,11 +127,12 @@ const jobOpenings = [
     ],
   },
   {
+    slug: "marketing-specialist",
     title: "Marketing Specialist",
     department: "Marketing",
     location: "San Francisco, CA (Hybrid)",
-    type: "Full-time",
-    salary: "$80,000 - $100,000",
+    employmentType: "Full-time",
+    salaryRange: "$80,000 - $100,000",
     description:
       "We're seeking a Marketing Specialist to help promote our services and generate leads through various digital marketing channels.",
     responsibilities: [
@@ -144,7 +152,31 @@ const jobOpenings = [
   },
 ];
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  let jobOpenings = fallbackJobOpenings;
+  try {
+    const vacancies = await listVacancies("public");
+    if (vacancies.length > 0) {
+      jobOpenings = vacancies.map((item) => ({
+        id: item.id,
+        title: item.title,
+        slug: item.slug,
+        departments: item.departments,
+        department: item.departments?.join(" · "),
+        location: item.location,
+        employmentTypes: item.employmentTypes,
+        employmentType: item.employmentTypes?.join(" · "),
+        salaryRange: item.salaryRange,
+        description: item.description,
+        responsibilities: item.responsibilities,
+        requirements: item.requirements,
+        status: item.status,
+      }));
+    }
+  } catch {
+    // Fallback to static vacancies if backend is unavailable.
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection

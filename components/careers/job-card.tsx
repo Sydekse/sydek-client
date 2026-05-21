@@ -5,6 +5,13 @@ import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/
 import type { JobCardProps } from "./types"
 
 export function JobCard({ job }: JobCardProps) {
+  const applicationsOpen = !job.status || job.status === "published"
+
+  const deptLabel =
+    job.departments?.length ? job.departments.join(" · ") : job.department ?? ""
+  const empLabel =
+    job.employmentTypes?.length ? job.employmentTypes.join(" · ") : job.employmentType ?? ""
+
   return (
     <AccordionItem
       value={`job-${job.title.toLowerCase().replace(/\s+/g, "-")}`}
@@ -14,7 +21,7 @@ export function JobCard({ job }: JobCardProps) {
         <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left">
           <div>
             <h3 className="text-xl font-semibold">{job.title}</h3>
-            <p className="text-muted-foreground">{job.department}</p>
+            <p className="text-muted-foreground">{deptLabel}</p>
           </div>
           <div className="flex flex-wrap gap-2 mt-2 md:mt-0">
             <div className="flex items-center text-xs bg-muted/50 px-2 py-1 rounded">
@@ -23,7 +30,7 @@ export function JobCard({ job }: JobCardProps) {
             </div>
             <div className="flex items-center text-xs bg-muted/50 px-2 py-1 rounded">
               <Briefcase className="h-3 w-3 mr-1" />
-              {job.type}
+              {empLabel}
             </div>
           </div>
         </div>
@@ -41,14 +48,14 @@ export function JobCard({ job }: JobCardProps) {
             <Clock className="h-5 w-5 text-secondary mr-2" />
             <div>
               <p className="text-sm font-medium">Job Type</p>
-              <p className="text-sm text-muted-foreground">{job.type}</p>
+              <p className="text-sm text-muted-foreground">{empLabel}</p>
             </div>
           </div>
           <div className="flex items-center">
             <DollarSign className="h-5 w-5 text-secondary mr-2" />
             <div>
               <p className="text-sm font-medium">Salary Range</p>
-              <p className="text-sm text-muted-foreground">{job.salary}</p>
+              <p className="text-sm text-muted-foreground">{job.salaryRange}</p>
             </div>
           </div>
         </div>
@@ -76,11 +83,23 @@ export function JobCard({ job }: JobCardProps) {
           </ul>
         </div>
 
-        <Link href={`/company/careers/apply/${job.title.toLowerCase().replace(/\s+/g, "-")}`}>
-          <Button className="bg-secondary hover:bg-secondary/90 text-white">
-            Apply Now <ArrowRight className="ml-2 h-4 w-4" />
+        {!applicationsOpen && job.status === "archived" && (
+          <p className="mb-4 text-sm font-medium text-muted-foreground">
+            This position is closed to new applications.
+          </p>
+        )}
+
+        {applicationsOpen ? (
+          <Link href={`/company/careers/apply/${job.slug}`}>
+            <Button className="bg-secondary hover:bg-secondary/90 text-white">
+              Apply Now <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        ) : (
+          <Button type="button" disabled variant="secondary" className="opacity-80">
+            Applications closed
           </Button>
-        </Link>
+        )}
       </AccordionContent>
     </AccordionItem>
   )

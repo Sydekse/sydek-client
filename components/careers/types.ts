@@ -1,12 +1,21 @@
 export interface Job {
+  id?: string
   title: string
-  department: string
+  slug: string
+  /** Multi-select labels, joined for display */
+  departments?: string[]
+  /** @deprecated use employmentTypes */
+  department?: string
   location: string
-  type: string
-  salary: string
+  employmentTypes?: string[]
+  /** @deprecated use employmentTypes */
+  employmentType?: string
+  salaryRange: string
   description: string
   responsibilities: string[]
   requirements: string[]
+  /** published = open to apply; archived = listed but closed; draft omitted from public API */
+  status?: string
 }
 
 export interface JobApplicationFormData {
@@ -47,6 +56,7 @@ export interface JobCardProps {
 
 export interface ApplicationFormProps {
   jobTitle: string
+  jobSlug: string
 }
 
 export interface BenefitCardProps {

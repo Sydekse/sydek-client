@@ -1,21 +1,22 @@
-"use client";
-
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { ApplicationForm } from "@/components/careers/application-form";
-import { use } from "react";
+import { ApplyAboutSidebar } from "@/components/careers/apply-about-sidebar";
+import { getVacancyBySlug } from "@/lib/careers-api";
+import { HeroSection } from "@/components/careers/hero-section";
 
-export default function JobApplicationPage({
+export default async function JobApplicationPage({
   params,
 }: {
-  params: Promise<{ job: string }>; // Type params as a Promise
+  params: Promise<{ job: string }>;
 }) {
-  const { job } = use(params); // Unwrap params with use()
-  const jobTitle = job
+  const { job } = await params;
+  const vacancy = await getVacancyBySlug(job).catch(() => null);
+  const jobTitle = vacancy?.title ?? job
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+  const applicationsOpen = vacancy?.status === "published";
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -36,8 +37,11 @@ export default function JobApplicationPage({
               Apply for <span className="text-gradient">{jobTitle}</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl">
-              We're excited about your interest in joining our team. Please
-              complete the application form below.
+              {applicationsOpen
+                ? "We're excited about your interest in joining our team. Please complete the application form below."
+                : vacancy
+                  ? "This role is no longer accepting applications, but we're glad you're exploring Sydek."
+                  : "We're excited about your interest in joining our team. Please complete the application form below."}
             </p>
           </div>
         </div>
@@ -48,88 +52,27 @@ export default function JobApplicationPage({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <ApplicationForm jobTitle={jobTitle} />
+              {applicationsOpen ? (
+                <ApplicationForm jobTitle={jobTitle} jobSlug={job} />
+              ) : vacancy && vacancy.status === "archived" ? (
+                <div className="rounded-xl border bg-muted/30 p-8 text-muted-foreground">
+                  Applications for this position are closed. See other roles on the{" "}
+                  <Link href="/company/careers" className="text-secondary underline">
+                    careers page
+                  </Link>
+                  .
+                </div>
+              ) : (
+                <ApplicationForm jobTitle={jobTitle} jobSlug={job} />
+              )}
             </div>
 
             <div className="space-y-8">
-              <div className="bg-background rounded-xl border p-6">
-                <h3 className="text-xl font-semibold mb-4">
-                  About This Position
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  You're applying for the{" "}
-                  <span className="font-medium text-foreground">
-                    {jobTitle}
-                  </span>{" "}
-                  position at Sydek.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-secondary mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Competitive Salary</p>
-                      <p className="text-sm text-muted-foreground">
-                        We offer above-market compensation
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-secondary mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Flexible Work</p>
-                      <p className="text-sm text-muted-foreground">
-                        Remote and hybrid options available
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-secondary mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Growth Opportunities</p>
-                      <p className="text-sm text-muted-foreground">
-                        Clear path for advancement
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-secondary mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Comprehensive Benefits</p>
-                      <p className="text-sm text-muted-foreground">
-                        Health, retirement, and more
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-muted/30 rounded-xl p-6 border">
-                <h3 className="text-xl font-semibold mb-4">Application Tips</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Tailor your resume to highlight relevant experience</li>
-                  <li>
-                    • Be specific about your achievements in your cover letter
-                  </li>
-                  <li>
-                    • Provide concrete examples of your skills and expertise
-                  </li>
-                  <li>• Double-check all information before submitting</li>
-                  <li>
-                    • Follow up if you haven't heard back within two weeks
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-secondary/10 rounded-xl p-6 border border-secondary/20">
-                <h3 className="text-xl font-semibold mb-4">Need Help?</h3>
-                <p className="text-muted-foreground mb-4">
-                  If you have any questions about the application process or the
-                  position, please don't hesitate to contact us.
-                </p>
-                <Button asChild variant="outline" className="w-full">
-                  <Link href="/company/contact">Contact Recruiting Team</Link>
-                </Button>
-              </div>
+              <ApplyAboutSidebar
+                jobTitle={jobTitle}
+                intro={vacancy?.applySidebarIntro}
+                highlights={vacancy?.applySidebarHighlights}
+              />
             </div>
           </div>
         </div>
