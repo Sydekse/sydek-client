@@ -4,26 +4,26 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, ArrowRight, Code, Server, Globe } from "lucide-react"
+import { HeroSection } from "@/components/careers/hero-section"
 
 export default function IntegrationsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <section className="pt-32 pb-8 md:pt-40 md:pb-12 bg-muted/30">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              href="/resources/docs"
-              className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Documentation
-            </Link>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Integrations</h1>
-            <p className="text-lg text-muted-foreground">Connect Sydek with your favorite tools and services</p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        variant="left"
+        contentClassName="max-w-4xl"
+        leadingAccessory={
+          <Link
+            href="/resources/docs"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Documentation
+          </Link>
+        }
+        title="Integrations"
+        subtitle="Connect Sydek with your favorite tools and services"
+      />
 
       {/* Content */}
       <section className="py-12 flex-grow">

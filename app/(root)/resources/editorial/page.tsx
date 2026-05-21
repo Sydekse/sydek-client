@@ -1,5 +1,7 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import HeroSection from "@/components/shared/hero-section";
+import { HeroSection } from "@/components/careers/hero-section";
 import ArticleCard from "@/components/resources/editorial/article-card";
 import FeaturedArticle from "@/components/resources/editorial/featured-article";
 import Newsletter from "@/components/resources/editorial/newsletter";
@@ -72,12 +74,21 @@ export default function EditorialPage() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <HeroSection
-        title="Sydek"
-        highlightedTitle="Editorial"
-        description="Insights, trends, and thought leadership from our experts."
-        buttonText="Browse Articles"
-        buttonLink="#articles"
-        backgroundParticles={0}
+        title="Sydek Editorial"
+        highlightedWord="Editorial"
+        subtitle="Insights, trends, and thought leadership from our experts."
+        actions={
+          <Button
+            size="lg"
+            className="rounded-full bg-secondary text-white hover:bg-secondary/90"
+            asChild
+          >
+            <Link href="#articles">
+              Browse Articles
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+            </Link>
+          </Button>
+        }
       />
 
       {/* Featured Article */}

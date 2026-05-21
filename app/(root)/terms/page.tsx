@@ -1,28 +1,30 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
-import InteractiveBackground from "@/components/interactive-background"
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { HeroSection } from "@/components/careers/hero-section";
 
 export default function TermsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-        <InteractiveBackground className="absolute inset-0" particleCount={15} />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
+      <HeroSection
+        variant="left"
+        contentClassName="max-w-3xl"
+        leadingAccessory={
+          <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
+        }
+        title="Terms of Service"
+        highlightedWord="Service"
+      />
 
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-              Terms of <span className="text-gradient">Service</span>
-            </h1>
-
-            <div className="bg-card rounded-xl border shadow-sm p-6 md:p-8 space-y-8">
+      <section className="pb-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <div className="rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 space-y-8">
               <section>
                 <h2 className="text-xl font-semibold mb-4">1. Introduction</h2>
                 <p className="text-muted-foreground mb-4">
@@ -128,7 +130,7 @@ export default function TermsPage() {
                 </p>
               </section>
 
-              <div className="pt-4 border-t">
+              <div className="border-t pt-4">
                 <p className="text-sm text-muted-foreground">Last updated: March 1, 2025</p>
               </div>
             </div>
@@ -145,4 +147,3 @@ export default function TermsPage() {
     </div>
   )
 }
-

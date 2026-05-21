@@ -2,27 +2,17 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Check, ChevronDown } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import InteractiveBackground from "@/components/interactive-background"
+import { HeroSection } from "@/components/careers/hero-section"
 
 export default function PricingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-        <InteractiveBackground />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-        <div className="container relative z-10 mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Transparent <span className="text-gradient">Pricing</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Choose the plan that's right for your business, with flexible options to scale as you grow.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        sectionClassName="pb-20 md:pb-32"
+        title="Transparent Pricing"
+        highlightedWord="Pricing"
+        subtitle="Choose the plan that's right for your business, with flexible options to scale as you grow."
+      />
 
       {/* Pricing Section */}
       <section className="py-16 md:py-24">

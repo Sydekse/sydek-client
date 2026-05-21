@@ -15,7 +15,7 @@ import {
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import InteractiveBackground from "@/components/interactive-background"
+import { HeroSection } from "@/components/careers/hero-section"
 
 const resourceCategories = [
   {
@@ -156,29 +156,25 @@ const resourceCategories = [
 export default function DownloadsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-        <InteractiveBackground />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-        <div className="container relative z-10 mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Resources & <span className="text-gradient">Downloads</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+      <HeroSection
+        sectionClassName="pb-20 md:pb-32"
+        title="Resources & Downloads"
+        highlightedWord="Downloads"
+        subtitle={
+          <>
+            <p className="mb-8 max-w-3xl text-xl leading-relaxed text-muted-foreground md:text-2xl mx-auto">
               Access our collection of guides, templates, tools, and other resources to help you get the most out of the
               Sydek platform.
             </p>
-            <div className="flex items-center justify-center max-w-md mx-auto">
+            <div className="flex max-w-md items-center justify-center mx-auto">
               <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input placeholder="Search resources..." className="pl-10 pr-4 py-6 text-lg" />
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-muted-foreground" />
+                <Input placeholder="Search resources..." className="py-6 pl-10 pr-4 text-lg" />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       {/* Resources Section */}
       <section className="py-16 md:py-24">

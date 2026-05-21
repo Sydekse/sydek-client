@@ -26,7 +26,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import InteractiveBackground from "@/components/interactive-background";
+import { HeroSection } from "@/components/careers/hero-section";
 
 export default function SecuritySettingsPage() {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
@@ -71,25 +71,24 @@ export default function SecuritySettingsPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24">
-        {/* <InteractiveBackground className="absolute inset-0" particleCount={15} /> */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Dashboard
-            </Link>
-
-            <h1 className="text-3xl font-bold tracking-tight mb-2">
-              Account <span className="text-gradient">Security</span>
-            </h1>
-            <p className="text-muted-foreground mb-8">
-              Manage your account security settings and monitor activity
-            </p>
-
+      <HeroSection
+        variant="left"
+        contentClassName="max-w-4xl"
+        sectionClassName="pb-16 md:pb-20"
+        leadingAccessory={
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Dashboard
+          </Link>
+        }
+        title="Account Security"
+        highlightedWord="Security"
+        subtitle="Manage your account security settings and monitor activity"
+        belowContent={
+          <div className="mx-auto mt-12 w-full max-w-4xl pb-12">
             <Tabs defaultValue="settings" className="w-full">
               <TabsList className="grid grid-cols-3 mb-8">
                 <TabsTrigger value="settings">Security Settings</TabsTrigger>
@@ -364,8 +363,8 @@ export default function SecuritySettingsPage() {
               </TabsContent>
             </Tabs>
           </div>
-        </div>
-      </section>
+        }
+      />
     </div>
   );
 }

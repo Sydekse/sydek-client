@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Share2, Bookmark, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { HeroSection } from "@/components/careers/hero-section"
 
 // This would typically come from a CMS or API
 const articles = [
@@ -96,9 +97,14 @@ const articles = [
   },
 ]
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   // Find the article by slug
-  const article = articles.find((article) => article.slug === params.slug)
+  const article = articles.find((article) => article.slug === slug)
 
   // If article not found, this would typically redirect to a 404 page
   if (!article) {
@@ -117,53 +123,51 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto">
+      <HeroSection
+        variant="left"
+        contentClassName="max-w-4xl"
+        leadingAccessory={
+          <div className="space-y-4">
             <Link
               href="/resources/editorial"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6"
+              className="inline-flex items-center text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Editorial
             </Link>
-
-            <div className="flex flex-wrap gap-2 mb-4">
-              <span className="text-xs font-medium bg-secondary/10 text-secondary px-2 py-1 rounded-full">
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-secondary/10 px-2 py-1 text-xs font-medium text-secondary">
                 {article.category}
               </span>
-              <span className="text-xs font-medium bg-muted px-2 py-1 rounded-full">{article.readTime}</span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">{article.title}</h1>
-
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-muted overflow-hidden mr-3">
-                  <Image
-                    src="/placeholder.svg?height=40&width=40"
-                    alt={article.author}
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-medium">{article.author}</p>
-                  <p className="text-xs text-muted-foreground">{article.authorRole}</p>
-                </div>
-              </div>
-              <div className="text-sm text-muted-foreground flex items-center">
-                <Calendar className="h-4 w-4 mr-1" />
-                {article.date}
-              </div>
+              <span className="rounded-full bg-muted px-2 py-1 text-xs font-medium">{article.readTime}</span>
             </div>
           </div>
-        </div>
-      </section>
+        }
+        title={article.title}
+        subtitle={
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+            <div className="flex items-center">
+              <div className="mr-3 h-10 w-10 overflow-hidden rounded-full bg-muted">
+                <Image
+                  src="/placeholder.svg?height=40&width=40"
+                  alt={article.author}
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-foreground">{article.author}</p>
+                <p className="text-xs text-muted-foreground">{article.authorRole}</p>
+              </div>
+            </div>
+            <div className="flex items-center text-sm text-muted-foreground">
+              <Calendar className="mr-1 h-4 w-4" />
+              {article.date}
+            </div>
+          </div>
+        }
+      />
 
       {/* Featured Image */}
       <section className="pb-12">

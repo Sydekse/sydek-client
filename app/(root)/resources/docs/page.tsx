@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowRight, Search, Book, Code, Users } from "lucide-react"
+import { HeroSection } from "@/components/careers/hero-section"
 
 const docCategories = [
   {
@@ -39,27 +40,23 @@ const docCategories = [
 export default function DocsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-              Sydek <span className="text-gradient">Documentation</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+      <HeroSection
+        title="Sydek Documentation"
+        highlightedWord="Documentation"
+        subtitle={
+          <>
+            <p className="mb-8 max-w-2xl text-xl leading-relaxed text-muted-foreground md:text-2xl mx-auto">
               Comprehensive guides and resources for both developers and clients.
             </p>
-            <div className="max-w-lg mx-auto">
+            <div className="mx-auto max-w-lg">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input placeholder="Search documentation..." className="pl-10 py-6 text-lg" />
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-muted-foreground" />
+                <Input placeholder="Search documentation..." className="py-6 pl-10 text-lg" />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       {/* Documentation Categories */}
       <section className="py-16 md:py-24">

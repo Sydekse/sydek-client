@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, Code, Copy, ExternalLink, Lock, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import InteractiveBackground from "@/components/interactive-background"
+import { HeroSection } from "@/components/careers/hero-section"
 
 // Sample API endpoints for display
 const endpoints = [
@@ -100,38 +100,38 @@ const endpoints = [
 export default function APIReferencePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-        <InteractiveBackground className="absolute inset-0" particleCount={20} />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto">
+      <HeroSection
+        variant="left"
+        contentClassName="max-w-4xl"
+        leadingAccessory={
+          <div className="space-y-4">
             <Link
               href="/resources/docs"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6"
+              className="inline-flex items-center text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Documentation
             </Link>
-
-            <div className="flex flex-wrap gap-2 mb-4">
-              <span className="text-xs font-medium bg-secondary/10 text-secondary px-2 py-1 rounded-full">
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-secondary/10 px-2 py-1 text-xs font-medium text-secondary">
                 Developer Guide
               </span>
             </div>
-
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">API Reference</h1>
-
-            <p className="text-xl text-muted-foreground mb-8">
+          </div>
+        }
+        title="API Reference"
+        subtitle={
+          <>
+            <p className="text-xl md:text-xl">
               Comprehensive documentation for the Sydek API, including endpoints, parameters, and response formats.
             </p>
-
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <div className="relative mt-6 max-w-xl">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-muted-foreground" />
               <Input placeholder="Search API endpoints..." className="pl-10" />
             </div>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       {/* Content Section */}
       <section className="py-12">
