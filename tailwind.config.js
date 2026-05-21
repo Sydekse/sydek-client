@@ -7,8 +7,9 @@ module.exports = {
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{ts,tsx}",
+    "./hooks/**/*.{ts,tsx}",
+    "./types/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -19,9 +20,14 @@ module.exports = {
       },
     },
     extend: {
+      maxWidth: {
+        terrava: "1200px",
+      },
       fontFamily: {
-        manrope: ["var(--font-manrope)", ...fontFamily.sans],
-        sans: ["var(--font-manrope)", ...fontFamily.sans],
+        sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        manrope: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        body: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Cormorant Garamond", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -53,10 +59,6 @@ module.exports = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -70,6 +72,11 @@ module.exports = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "terrava-lg": "var(--radius-terrava-lg)",
+        "terrava-pill": "var(--radius-terrava-pill)",
+      },
+      boxShadow: {
+        "terrava-card": "var(--shadow-terrava-card)",
       },
       keyframes: {
         "accordion-down": {
