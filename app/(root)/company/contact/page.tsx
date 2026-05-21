@@ -8,7 +8,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import ContactForm from "@/components/contact/contact-form";
 import ContactInfo from "@/components/contact/contact-info";
-import HeroSection from "@/components/shared/hero-section";
+import { HeroSection } from "@/components/careers/hero-section";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -23,9 +23,9 @@ export default function ContactPage() {
       {/* Hero Section */}
 
       <HeroSection
-        title="Get in"
-        highlightedTitle="Touch"
-        description="Have a question or want to work together? We'd love to hear from you."
+        title="Get in Touch"
+        highlightedWord="Touch"
+        subtitle="Have a question or want to work together? We'd love to hear from you."
       />
 
       {/* Contact Form Section */}
@@ -34,7 +34,9 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-2 gap-12">
             <ContactInfo />
 
-            <ContactForm />
+            <div id="contact-form">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Check, ChevronDown, ExternalLink } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import InteractiveBackground from "@/components/interactive-background"
+import { HeroSection } from "@/components/careers/hero-section"
 
 // Sample partner logos
 const featured = [
@@ -32,28 +32,20 @@ const services = [
 export default function PartnersPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-        <InteractiveBackground />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-        <div className="container relative z-10 mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Our <span className="text-gradient">Partners</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Collaborating with industry leaders to deliver innovative solutions and exceptional value to our clients.
-            </p>
-            <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90">
-              <Link href="#partner-program">
-                Become a Partner
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        sectionClassName="pb-20 md:pb-32"
+        title="Our Partners"
+        highlightedWord="Partners"
+        subtitle="Collaborating with industry leaders to deliver innovative solutions and exceptional value to our clients."
+        actions={
+          <Button size="lg" className="bg-secondary hover:bg-secondary/90" asChild>
+            <Link href="#partner-program">
+              Become a Partner
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        }
+      />
 
       {/* Featured Partners */}
       <section className="py-16 md:py-24">

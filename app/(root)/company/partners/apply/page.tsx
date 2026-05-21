@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react"
-import InteractiveBackground from "@/components/interactive-background"
+import { HeroSection } from "@/components/careers/hero-section";
 
 export default function PartnerApplyPage() {
   const [formData, setFormData] = useState({
@@ -55,30 +55,20 @@ export default function PartnerApplyPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-        <InteractiveBackground className="absolute inset-0" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(95,31,95,0.2),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(187,173,213,0.2),transparent_60%)]"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <Link
-              href="/company/partners"
-              className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Partners
-            </Link>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Apply to the <span className="text-gradient">Partner Program</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join our global network of partners and grow your business while delivering exceptional solutions to
-              clients.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        leadingAccessory={
+          <Link
+            href="/company/partners"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mx-auto lg:mx-0"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Partners
+          </Link>
+        }
+        title="Apply to the Partner Program"
+        highlightedWord="Partner Program"
+        subtitle="Join our global network of partners and grow your business while delivering exceptional solutions to clients."
+      />
 
       {/* Application Form */}
       <section className="py-16 md:py-24 bg-muted/30">
