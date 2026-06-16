@@ -26,6 +26,17 @@ export type SendMessageResult = {
 const baseUrl =
   process.env.NEXT_PUBLIC_SCOPING_API_BASE_URL ?? "http://localhost:8080";
 
+async function readApiError(response: Response, fallback: string): Promise<string> {
+  try {
+    const body = (await response.json()) as { error?: { message?: string }; message?: string };
+    const message = body.error?.message ?? body.message;
+    if (message?.trim()) return message;
+  } catch {
+    /* non-JSON body */
+  }
+  return fallback;
+}
+
 export async function startSession(visitorId: string) {
   const response = await fetch(`${baseUrl}/v1/scoping/sessions`, {
     method: "POST",
@@ -34,7 +45,7 @@ export async function startSession(visitorId: string) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to start session");
+    throw new Error(await readApiError(response, "Failed to start session"));
   }
 
   const data = await response.json();
@@ -55,7 +66,7 @@ export async function sendMessage(
   });
 
   if (!response.ok) {
-    throw new Error("Failed to send message");
+    throw new Error(await readApiError(response, "Failed to send message"));
   }
 
   const raw = await response.text();

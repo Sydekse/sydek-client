@@ -275,7 +275,7 @@ export const caseStudies: CaseStudy[] = [
       "Webhook-driven flows with idempotent ingestion for replies and bookings",
       "Next.js 15 dashboards with Axios + slice-based auth ergonomics",
     ],
-    image: "/placeholder.svg?height=686&width=1600&query=EmbedUr%20dashboard",
+    image: "/assets/images/projects/embedur.png",
     featured: false,
     duration: "Live · 2025",
     servicesProvided: [
@@ -354,7 +354,7 @@ export const caseStudies: CaseStudy[] = [
       "Dedicated admin verification endpoint enforcing bcrypt checks",
       "Brand palette anchored in deep brown #532516 + gold #E8982E",
     ],
-    image: "/placeholder.svg?height=686&width=1600&query=Liyu%20Catering",
+    image: "/assets/images/projects/liyu_catering.png",
     featured: false,
     duration: "Live · 2024",
     servicesProvided: [
@@ -394,7 +394,7 @@ export const caseStudies: CaseStudy[] = [
       "Semantic Tailwind v4 consuming OKLCH theme tokens",
       "Keyboard-ready overlays and forms via Radix",
     ],
-    image: "/placeholder.svg?height=686&width=1600&query=Kansa%20Business%20Group",
+    image: "/assets/images/projects/kansa_trading.png",
     featured: true,
     duration: "Live · 2026",
     servicesProvided: [
@@ -433,7 +433,7 @@ export const caseStudies: CaseStudy[] = [
       "Vector-grounded answers referencing internal artifacts",
       "Outputs toward CRM-ready briefs plus human escalation seams",
     ],
-    image: "/placeholder.svg?height=686&width=1600&query=RAG%20scoping",
+    image: "/assets/images/projects/sydek_scoping.png",
     featured: false,
     duration: "In development · 2026",
     servicesProvided: [

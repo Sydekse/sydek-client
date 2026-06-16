@@ -1,5 +1,8 @@
 import type { PortfolioProjectRecord } from "@/data/projects-portfolio";
-import type { SydekShowcaseAccent, SydekShowcaseProject } from "@/lib/sydek-org-projects";
+import type { SydekOrgProject } from "@/data/sydek-org-projects";
+
+export type SydekShowcaseAccent = SydekOrgProject["accent"];
+export type SydekShowcaseProject = Omit<SydekOrgProject, "org">;
 
 const ACCENT_CYCLE: SydekShowcaseAccent[] = [
   "purple",
