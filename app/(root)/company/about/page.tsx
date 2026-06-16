@@ -85,7 +85,7 @@ export default function AboutPage() {
       />
 
       <MissionSection
-        imageSrc="/assets/images/about/mission-leaf.jpg"
+        imageSrc="/assets/images/about/about_us.jpeg"
         imageAlt="Sydek Mission"
         title="Our Mission"
         description={[
@@ -221,12 +221,6 @@ export default function AboutPage() {
         ]}
       />
 
-      <CTASection
-        title="Join Our Journey"
-        description="Interested in working with us or joining our team? We'd love to hear from you."
-        primaryButtonText="Contact Us"
-        secondaryButtonText="View Careers"
-      />
     </div>
   );
 }

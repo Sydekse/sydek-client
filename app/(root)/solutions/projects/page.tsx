@@ -141,13 +141,6 @@ export default function ProjectsSolutionsPage() {
 
     
       <ProductGrid tiles={spotlightTiles} className="py-14 md:py-20" />
-
-      <CtaCard
-        title="Ready to build your next product?"
-        description="Let's collaborate from discovery through launch — staffed squads that own architecture, UX, and delivery timelines."
-        buttonText="Talk with Sydek"
-        buttonLink="/company/contact"
-      />
     </div>
   );
 }

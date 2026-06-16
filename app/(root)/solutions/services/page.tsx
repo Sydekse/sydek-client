@@ -159,7 +159,7 @@ const servicesBentoSpotlight = {
   title: "From discovery workshops to hardened production systems",
   description:
     "We pair strategists with senior engineers early so scope, UX, architecture, and risk tradeoffs stay coherent. Fewer pivots mid-build—and documentation your internal team can own after handoff.",
-  imageSrc: "/assets/images/nav-bar/navbar-below.png",
+  videoSrc: "/assets/images/videos/services.mp4",
   imageAlt: "Sydek services preview",
   primaryCta: { label: "Plan the next sprint", href: "/company/contact" },
   outlineCta: { label: "Explore projects", href: "/solutions/projects" },
@@ -316,24 +316,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Digital Presence?</h2>
-            <p className="text-xl mb-8 text-muted-foreground">
-              Let's collaborate to create innovative digital solutions that drive your business forward. Our team of
-              experts is ready to bring your vision to life.
-            </p>
-            <Button asChild size="lg" variant="secondary" className="rounded-full">
-              <Link href="/contact">
-                Get in Touch
-                <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

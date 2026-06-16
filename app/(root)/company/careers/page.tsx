@@ -207,8 +207,8 @@ export default async function CareersPage() {
             description: "A diverse and supportive work environment",
           },
         ]}
-        imageSrc="/placeholder.svg?height=600&width=800"
-        imageAlt="Sydek Team"
+        imageSrc="/assets/images/about/career_wave.jpeg"
+        imageAlt="Sydek team culture"
       />
 
       <JobListing jobs={jobOpenings} />

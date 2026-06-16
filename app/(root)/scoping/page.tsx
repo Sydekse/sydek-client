@@ -44,7 +44,9 @@ export default function ScopingPage() {
         ]);
       } catch (err) {
         if (!isMounted) return;
-        setError("Unable to connect to the scoping backend.");
+        setError(
+          err instanceof Error ? err.message : "Unable to connect to the scoping backend."
+        );
       }
     };
 
@@ -76,8 +78,8 @@ export default function ScopingPage() {
         },
       ]);
       setQuizQuestions(response.quizQuestions);
-    } catch {
-      setError("Message failed. Please retry.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Message failed. Please retry.");
     } finally {
       setIsSending(false);
     }

@@ -14,6 +14,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { caseStudies, type CaseStudySuite } from "@/data/case-studies";
 import { HeroSection } from "@/components/careers/hero-section";
 
+/** Hidden from listings until the story is ready to publish. */
+const visibleCaseStudies = caseStudies.filter((s) => s.id !== "addis-spare");
+
 const TAB_IDS: { value: CaseStudySuite | "all"; label: string }[] = [
   { value: "all", label: "All" },
   { value: "sydek-product", label: "Sydek products" },
@@ -29,7 +32,7 @@ function filterByTab(
 }
 
 export default function CaseStudiesPage() {
-  const industries = [...caseStudies.reduce((acc, c) => {
+  const industries = [...visibleCaseStudies.reduce((acc, c) => {
     acc.set(c.industry, (acc.get(c.industry) ?? 0) + 1);
     return acc;
   }, new Map<string, number>())];
@@ -51,7 +54,7 @@ export default function CaseStudiesPage() {
           </h2>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            {caseStudies
+            {visibleCaseStudies
               .filter((study) => study.featured)
               .map((study) => (
                 <div
@@ -129,7 +132,7 @@ export default function CaseStudiesPage() {
             {TAB_IDS.map((t) => (
               <TabsContent key={t.value} value={t.value} className="mt-0">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {filterByTab(t.value, caseStudies).map((study) => (
+                  {filterByTab(t.value, visibleCaseStudies).map((study) => (
                     <Card key={study.id} className="overflow-hidden">
                       <div className="aspect-[3/2] overflow-hidden">
                         <Image
