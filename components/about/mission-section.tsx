@@ -1,7 +1,8 @@
 import Image from "next/image";
 
 interface MissionSectionProps {
-  imageSrc: string;
+  imageSrc?: string;
+  videoSrc?: string;
   imageAlt: string;
   title: string;
   description: string[];
@@ -9,6 +10,7 @@ interface MissionSectionProps {
 
 export function MissionSection({
   imageSrc,
+  videoSrc,
   imageAlt,
   title,
   description,
@@ -19,14 +21,28 @@ export function MissionSection({
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-secondary to-accent rounded-2xl blur opacity-20"></div>
-            <div className="relative rounded-2xl overflow-hidden border shadow-xl">
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                width={800}
-                height={600}
-                className="w-full h-auto"
-              />
+            <div className="relative overflow-hidden rounded-2xl border shadow-xl">
+              {videoSrc ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="aspect-[4/3] w-full object-cover"
+                  aria-label={imageAlt}
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
+              ) : imageSrc ? (
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={800}
+                  height={600}
+                  className="aspect-[4/3] w-full object-cover"
+                />
+              ) : null}
             </div>
           </div>
           <div>

@@ -45,7 +45,7 @@ export function BenefitsSection({
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[4/3] overflow-hidden rounded-xl border shadow-xl">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border shadow-xl">
               <Image
                 src={imageSrc}
                 alt={imageAlt}

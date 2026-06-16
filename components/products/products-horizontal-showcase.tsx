@@ -69,7 +69,7 @@ export function ProductsHorizontalShowcase({
 }: ProductsHorizontalShowcaseProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const itemRefs = useRef<Map<string, HTMLElement>>(new Map());
 
   const categories = useMemo(() => {
     const seen = new Set<string>();

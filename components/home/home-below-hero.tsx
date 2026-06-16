@@ -42,7 +42,7 @@ export function HomeBelowHero() {
   const servicesBentoSpotlight: ServicesBentoSpotlight = {
     label: "Partnership-led delivery",
     title: "From strategy sketches to polished, resilient products",
-    imageSrc: "/assets/images/home/future-thinking.jpg",
+    videoSrc: "/assets/images/videos/section.mp4",
     imageAlt: "Sydek team collaborating",
     description:
       "Sydek blends product thinking, UX craft, and full-stack engineering so launches feel cohesive—from first workshop to rollout, measurement, and iteration.",
@@ -58,14 +58,20 @@ export function HomeBelowHero() {
           <div className="relative mx-auto max-w-5xl">
             <div className="relative isolate overflow-hidden rounded-[3rem] border border-border/40 shadow-2xl">
               <div className="relative aspect-[21/13] min-h-[min(100vw,420px)] w-full md:aspect-[21/11] md:min-h-[480px]">
-                <Image
-                  src="/assets/images/nav-bar/navbar-below.png"
-                  alt="Sydek — innovative digital solutions"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width:1024px) 100vw, 1024px"
-                  priority
-                />
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  aria-label="Sydek — innovative digital solutions"
+                >
+                  <source
+                    src="/assets/images/home/watercolor_illustration.mp4"
+                    type="video/mp4"
+                  />
+                </video>
                 <div
                   className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/55"
                   aria-hidden

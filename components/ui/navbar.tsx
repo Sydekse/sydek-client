@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Moon, Sun, ArrowRight } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { BookNowButton } from "@/components/marketing/book-now-button";
 import { cn } from "@/lib/utils";
 
 type MegaNavCategory = {
@@ -61,16 +62,16 @@ const navItems = [
         {
           title: "Our Products",
           description: "Scalable solutions for large organizations",
-          image: "/assets/images/nav-bar/products.jpg",
+          image: "/assets/images/home/nav1.jpeg",
           href: "/solutions/products",
-          color: "from-orange-500/20 to-red-500/20",
+          color: "from-violet-500/25 to-fuchsia-500/25",
         },
         {
           title: "Custom Projects",
           description: "Tailored solutions for your unique needs",
-          image: "/assets/images/nav-bar/projects.jpg",
+          image: "/assets/images/home/nav2.jpeg",
           href: "/solutions/projects",
-          color: "from-pink-500/20 to-rose-500/20",
+          color: "from-purple-500/25 to-pink-500/25",
         },
       ],
       categories: [
@@ -134,16 +135,16 @@ const navItems = [
         {
           title: "About Us",
           description: "Our story, mission, and values",
-          image: "/assets/images/nav-bar/about-us.jpg",
+          image: "/assets/images/home/nav3.jpeg",
           href: "/company/about",
-          color: "from-blue-500/20 to-sky-500/20",
+          color: "from-violet-500/25 to-purple-500/25",
         },
         {
           title: "Contact Us",
           description: "Start Growing with Us!",
-          image: "/assets/images/nav-bar/contact-us.jpg",
+          image: "/assets/images/home/nav4.jpeg",
           href: "/company/contact",
-          color: "from-green-500/20 to-emerald-500/20",
+          color: "from-fuchsia-500/25 to-pink-500/25",
         },
       ],
       categories: [
@@ -151,7 +152,6 @@ const navItems = [
           title: "Get to Know Us",
           items: [
             { title: "Career", href: "/company/careers" },
-            { title: "Partners", href: "/company/partners" },
           ],
         },
         {
@@ -345,17 +345,10 @@ export default function Navbar() {
               <span className="sr-only">Toggle theme</span>
             </Button>
 
-            <Button
-              asChild
-              variant="secondary"
-              size="sm"
-              className={cn(
-                "hidden rounded-full px-5 font-medium shadow-sm transition-all md:inline-flex",
-                scrolled && "shadow-md"
-              )}
-            >
-              <Link href="/company/contact">Start Growing</Link>
-            </Button>
+            <BookNowButton
+              className={cn("hidden md:inline-flex", scrolled && "shadow-lg")}
+              onClick={closeMenu}
+            />
 
             <button
               type="button"
@@ -376,7 +369,7 @@ export default function Navbar() {
           {megaPanelItem?.submenu ? (
             <div
               className={cn(
-                "hidden overflow-hidden md:grid motion-safe:transition-[grid-template-rows,opacity] motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                "hidden overflow-hidden md:grid motion-safe:transition-[grid-template-rows,opacity] motion-safe:ease-mega-panel motion-reduce:transition-none",
                 megaVisibleDesktop
                   ? "grid-rows-[1fr] opacity-100"
                   : "pointer-events-none grid-rows-[0fr] opacity-0"
@@ -513,15 +506,9 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-              <Button
-                asChild
-                variant="secondary"
-                className="mt-3 h-10 w-full rounded-full"
-              >
-                <Link href="/scoping" onClick={closeMenu}>
-                  Get Started
-                </Link>
-              </Button>
+              <div className="mt-3 md:hidden">
+                <BookNowButton className="w-full justify-center" onClick={closeMenu} />
+              </div>
             </nav>
           </div>
         )}

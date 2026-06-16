@@ -15,7 +15,8 @@ export type ServicesBentoSpotlight = {
   label: string;
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc?: string;
+  videoSrc?: string;
   imageAlt: string;
   primaryCta: { label: string; href: string };
   outlineCta?: { label: string; href: string };
@@ -74,13 +75,27 @@ export function ServicesBento({
         {/* Spotlight */}
         <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 md:grid-cols-12 md:gap-6">
           <div className="relative min-h-[220px] overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm md:col-span-7 md:rounded-3xl lg:min-h-[320px]">
-            <Image
-              src={spotlight.imageSrc}
-              alt={spotlight.imageAlt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 58vw"
-            />
+            {spotlight.videoSrc ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 h-full w-full object-cover"
+                aria-label={spotlight.imageAlt}
+              >
+                <source src={spotlight.videoSrc} type="video/mp4" />
+              </video>
+            ) : spotlight.imageSrc ? (
+              <Image
+                src={spotlight.imageSrc}
+                alt={spotlight.imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 58vw"
+              />
+            ) : null}
           </div>
           <div className="flex flex-col justify-center rounded-2xl border border-border/60 bg-card p-6 shadow-sm md:col-span-5 md:rounded-3xl md:p-8 lg:p-10">
             <p className="text-sm font-semibold uppercase tracking-wide text-tertiary">

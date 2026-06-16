@@ -24,7 +24,6 @@ const footerColumns = [
       { label: "Consultancy", href: "/company/programs/consultancy" },
       { label: "Contact", href: "/company/contact" },
       { label: "Careers", href: "/company/careers" },
-      { label: "Partners", href: "/company/partners" },
     ],
   },
   {
